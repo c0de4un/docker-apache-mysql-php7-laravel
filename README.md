@@ -1,5 +1,5 @@
 # docker-apache-mysql-php7-laravel
-Dockerized LAMP wrapper for Laravel projects based on PHP 8
+Dockerized LAMP wrapper for Laravel projects based on PHP 7.4
 
 ## Features
 * PHP 7.4
