@@ -1,0 +1,37 @@
+services:
+  app:
+    container_name: app
+    restart: always
+    ports:
+     - "80:80"
+     - "443:443"
+    volumes:
+      - ./api/html:/var/www/html
+      - ./api/var/spool/cron/crontabs:/var/spool/cron/crontabs
+      - ./api/etc/apache2/conf-available:/etc/apache2/conf-available
+    build:
+      context: app
+      dockerfile: Dockerfile
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+  db:
+    image: mysql
+    container_name: db
+    volumes:
+      - ./db/data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=wiaJ022T
+      - MYSQL_DATABASE=appdb
+      - MYSQL_USER=UqOoSWgr
+      - MYSQL_PASSWORD=SsJELBXo
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: pma
+    links:
+      - db
+    ports:
+      - 3306:80
+    environment:
+      - PMA_PORT=3306
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
